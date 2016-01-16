@@ -1,0 +1,51 @@
+/******************************************************************
+|  GOAL: Make an interactive cube which displays content based on |
+|        the view of the cube. This view can be manipulated with  |
+|        the arrow keys, WASD, and dragging the mouse.            |
+******************************************************************/
+
+.cube-container {
+  perspective: 800px; /* Manipulates how 3d objects are displayed.*/
+  perspective-origin: 50% 200px;
+}
+
+.cube {
+  position: relative;
+  width: 300px;
+  transform-style: preserve-3d; /*specifies that the children will be in 3d, and not flat.*/
+}
+
+.cube div {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  /*border: 1px solid #555;*/
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(150px);
+}
+
+.top {
+  transform: rotateX(90deg) translateY(-150px);
+  transform-origin: top center;
+}
+
+.right {
+  transform: rotateY(-270deg) translateX(150px);
+  transform-origin: top right;
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateY(150px);
+  transform-origin: bottom center;
+}
+
+.left {
+  transform: rotateY(270deg) translateZ(150px);
+  transform origin: left center;
+}
+
+.front {
+  transform: translateZ(150px);
+}

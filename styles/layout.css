@@ -1,0 +1,36 @@
+.cube-container {
+  position: absolute;
+  left: 400px;
+  top: 150px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; /* These are to prevent the user from selecting text */
+  cursor: default;
+}
+
+.front {
+  background-color: #F00;
+}
+
+.top {
+  background-color: #0F0;
+}
+
+.right {
+  background-color: #00F;
+}
+
+.bottom {
+  background-color: #FF0;
+}
+
+.left {
+  background-color: #F0F;
+}
+
+.back {
+  background-color: #0FF;
+}
