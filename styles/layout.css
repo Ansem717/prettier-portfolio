@@ -1,6 +1,6 @@
 .cube-container {
   position: absolute;
-  left: 400px;
+  left: 200px;
   top: 150px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -13,24 +13,30 @@
 
 .front {
   background-color: #F00;
+  opacity: 0.5;
 }
 
 .top {
   background-color: #0F0;
+  opacity: 0.5;
 }
 
 .right {
   background-color: #00F;
+  opacity: 0.5;
 }
 
 .bottom {
   background-color: #FF0;
+  opacity: 0.5;
 }
 
 .left {
   background-color: #F0F;
+  opacity: 0.5;
 }
 
 .back {
   background-color: #0FF;
+  opacity: 0.5;
 }

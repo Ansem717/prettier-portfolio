@@ -6,13 +6,15 @@
 
 .cube-container {
   perspective: 800px; /* Manipulates how 3d objects are displayed.*/
-  perspective-origin: 50% 200px;
+  perspective-origin: 50% 150px;
 }
 
 .cube {
   position: relative;
   width: 300px;
   transform-style: preserve-3d; /*specifies that the children will be in 3d, and not flat.*/
+  transform-origin: center 150px;
+  transform: rotateY(-20deg) rotateX(0deg);
 }
 
 .cube div {

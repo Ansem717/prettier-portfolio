@@ -9,54 +9,43 @@
 var cube = {}
 var mouseLocX = 0;
 var mouseLocY = 0;
+var curPos = '';
 
 cube.DnD = function (){
   $('body').mouseup(function(mouse){
     $('body').off('mousemove');
-    // console.log('Mouse has been lifted.');
   });
   $('.cube-container').mousedown(function(event){
     mouseLocX=event.pageX;
     mouseLocY=event.pageY;
-    // console.log('Mouse Location: ('+mouseLocX+', '+mouseLocY+')');
-    // console.log('Mouse is down.');
+    curPos = $('.cube').css('transform');
+    console.log(curPos)
     $('body').mousemove(function(mouse){
-      // console.log('x='+mouse.pageX+', y='+mouse.pageY);
       cube.rotate(mouse.pageX, mouse.pageY);
     });
   });
 }
 
-cube.rotate = function(x,y){
-  // var vertPosition = y - mouseLocY;
-  // var horzPosition = x - mouseLocX;
-  // var pieTime = horzPosition + vertPosition / 4;
-  // var rotate3d = 'rotate3d('+horzPosition+', '+vertPosition+', 0, '+pieTime+'deg)';
-  // console.log(rotate3d);
-  // $('.cube').css('transform', rotate3d);
-  // console.log($('.cube').css('transform'));
-  cube.rotateX(x);
-  // cube.rotateY(y);
-}
-
 /**********************************************************
-|  I have messed around with so many lines of code but I  |
-|  just cannot seem to get my cube to rotate on both axis |
-|  at the same time. * Note to self: The cube repositions |
-|  itself after click and dragging, every time.           |
+|  I need to set up a code to always check which side of  |
+|  the cube is being shown. If the bottom is being shown, |
+|  then when the user starts a new rotation, rotating     |
+|  horizontally will rotate on the Z axis. Same with the  |
+|  right face rotating vertically. So far, the code works |
+|  if the front face is viewed.                           |
 **********************************************************/
 
-cube.rotateX = function(x){
-  var horzPosition = x - mouseLocX;
-  var horzTransform = 'rotateY('+horzPosition+'deg)';
-  // console.log(horzTransform)
-  // console.log($('.cube').css('transform'));
-  $('.cube').css('transform', horzTransform);
-}
+cube.rotate = function(mpx, mpy) {
+  // with Trial and Error, this is the brute force way of checking which face has the most screen time.
+  // Extract numbers from the matrix3d that is returned from the 'translate' css property when checked:
+  console.log(curPos)
 
-
-cube.rotateY = function(y){
-  var vertPosition = y - mouseLocY;
-  var vertTransform = 'rotateX('+vertPosition+'deg)';
-  $('.cube').css('transform', vertTransform);
+  var xDeg = (mpx - mouseLocX)/2;
+  var yDeg = -1*(mpy - mouseLocY)/2.5; //The Y axis is inverted
+  var xDegCSS = 'rotateY('+xDeg+'deg)';
+  var bothCSS = xDegCSS+' rotateX('+yDeg+'deg)';
+  $('.cube').css('transform', bothCSS);
+  // $('.cube').css('transform', xDegCSS);
+  // $('.cube').css('transform', yDegCSS);
+  // $('.cube').css('trasnform', curPos);
 }
