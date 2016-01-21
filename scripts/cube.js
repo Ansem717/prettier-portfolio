@@ -5,11 +5,15 @@
 |       the position of the cursor.                               |
 ******************************************************************/
 
-//Setting up an object to hold variables and methods for the cube
+//Setting up an object to hold methods for the cube
 var cube = {}
+var curPos = '';
+var xDeg = 0;
+var yDeg = 0;
+var zDeg = 0;
 var mouseLocX = 0;
 var mouseLocY = 0;
-var curPos = '';
+var mouseLocZ = 0;
 
 cube.DnD = function (){
   $('body').mouseup(function(mouse){
@@ -19,7 +23,6 @@ cube.DnD = function (){
     mouseLocX=event.pageX;
     mouseLocY=event.pageY;
     curPos = $('.cube').css('transform');
-    console.log(curPos)
     $('body').mousemove(function(mouse){
       cube.rotate(mouse.pageX, mouse.pageY);
     });
@@ -36,15 +39,27 @@ cube.DnD = function (){
 **********************************************************/
 
 cube.rotate = function(mpx, mpy) {
-  // with Trial and Error, this is the brute force way of checking which face has the most screen time.
-  // Extract numbers from the matrix3d that is returned from the 'translate' css property when checked:
-  console.log(curPos)
-
-  var xDeg = (mpx - mouseLocX)/2;
-  var yDeg = -1*(mpy - mouseLocY)/2.5; //The Y axis is inverted
+  console.log('');
+  console.log('xDeg = '+xDeg+', yDeg = '+yDeg+', zDeg = '+zDeg);
+  xDeg = (mpx - mouseLocX)/2; //Later, we need to divide by 2 to slow down //The Y axis is inverted; We need to divide by 2.5 to slow down
+  console.log(mpy+' = mpy - before if - mouseLocY = '+mouseLocY);
+  if (xDeg < -45) {
+    zDeg = -1*(mpy - mouseLocZ)/2.5;
+    yDeg = yDeg;
+    mouseLocZ=event.pageY;
+  } else {
+    console.log(mpy+' = mpy - if False - mouseLocY = '+mouseLocY);
+    yDeg = -1*(mpy - mouseLocY)/2.5;
+    console.log(mpy+' = mpy - yDeg set - mouseLocY = '+mouseLocY);
+    zDeg = zDeg;
+    mouseLocZ=event.pageY;
+  }
+  console.log(yDeg);
+  console.log('mouseLocY = '+mouseLocY);
   var xDegCSS = 'rotateY('+xDeg+'deg)';
-  var bothCSS = xDegCSS+' rotateX('+yDeg+'deg)';
-  $('.cube').css('transform', bothCSS);
+  var xyDegCSS = xDegCSS+' rotateX('+yDeg+'deg)';
+  var xyzDegCSS = xyDegCSS+' rotateZ('+zDeg+'deg)';
+  $('.cube').css('transform', xyzDegCSS);
   // $('.cube').css('transform', xDegCSS);
   // $('.cube').css('transform', yDegCSS);
   // $('.cube').css('trasnform', curPos);
