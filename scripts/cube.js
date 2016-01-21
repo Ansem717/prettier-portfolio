@@ -7,22 +7,30 @@
 
 //Setting up an object to hold methods for the cube
 var cube = {}
-var curPos = '';
-var xDeg = 0;
-var yDeg = 0;
-var zDeg = 0;
-var mouseLocX = 0;
-var mouseLocY = 0;
-var mouseLocZ = 0;
+var deg = {
+  x: -20,
+  y: 0,
+  z: 0,
+  curX: 0,
+  curY: 0,
+  curZ: 0
+}
+var mouseLoc = {
+  x = 0,
+  y = 0,
+  z = 0
+}
 
 cube.DnD = function (){
   $('body').mouseup(function(mouse){
     $('body').off('mousemove');
   });
   $('.cube-container').mousedown(function(event){
-    mouseLocX=event.pageX;
-    mouseLocY=event.pageY;
-    curPos = $('.cube').css('transform');
+    mouseLoc.x=event.pageX;
+    mouseLoc.y=event.pageY;
+    deg.curX=deg.x;
+    deg.curY=deg.y;
+    deg.curZ=deg.z;
     $('body').mousemove(function(mouse){
       cube.rotate(mouse.pageX, mouse.pageY);
     });
@@ -40,25 +48,24 @@ cube.DnD = function (){
 
 cube.rotate = function(mpx, mpy) {
   console.log('');
-  console.log('xDeg = '+xDeg+', yDeg = '+yDeg+', zDeg = '+zDeg);
-  xDeg = (mpx - mouseLocX)/2; //Later, we need to divide by 2 to slow down //The Y axis is inverted; We need to divide by 2.5 to slow down
-  console.log(mpy+' = mpy - before if - mouseLocY = '+mouseLocY);
-  if (xDeg < -45) {
-    zDeg = -1*(mpy - mouseLocZ)/2.5;
-    yDeg = yDeg;
-    mouseLocZ=event.pageY;
+  console.log('deg.x = '+deg.x+', deg.y = '+deg.y+', deg.z = '+deg.z);
+  deg.x = deg.curX-(-1*(mpx - mouseLoc.x)/2);
+  console.log(mpy+' = mpy - before if - mouseLoc.y = '+mouseLoc.y);
+  if (deg.x < -45) {
+    deg.z = deg.curZ-(-1*(mpy - mouseLoc.z)/2.5);
+    mouseLoc.y=event.pageY;
   } else {
-    console.log(mpy+' = mpy - if False - mouseLocY = '+mouseLocY);
-    yDeg = -1*(mpy - mouseLocY)/2.5;
-    console.log(mpy+' = mpy - yDeg set - mouseLocY = '+mouseLocY);
-    zDeg = zDeg;
-    mouseLocZ=event.pageY;
+    console.log(mpy+' = mpy - if False - mouseLoc.y = '+mouseLoc.y);
+    deg.y = deg.curY-((mpy - mouseLoc.y)/2.5);
+    console.log(mpy+' = mpy - deg.y set - mouseLoc.y = '+mouseLoc.y);
+    mouseLoc.z=event.pageY;
   }
-  console.log(yDeg);
-  console.log('mouseLocY = '+mouseLocY);
-  var xDegCSS = 'rotateY('+xDeg+'deg)';
-  var xyDegCSS = xDegCSS+' rotateX('+yDeg+'deg)';
-  var xyzDegCSS = xyDegCSS+' rotateZ('+zDeg+'deg)';
+  console.log('deg.y = '+deg.y);
+  console.log('mouseLoc.y = '+mouseLoc.y);
+  console.log('event.pageY = '+event.pageY);
+  var xDegCSS = 'rotateY('+deg.x+'deg)';
+  var xyDegCSS = xDegCSS+' rotateX('+deg.y+'deg)';
+  var xyzDegCSS = xyDegCSS+' rotateZ('+deg.z+'deg)';
   $('.cube').css('transform', xyzDegCSS);
   // $('.cube').css('transform', xDegCSS);
   // $('.cube').css('transform', yDegCSS);

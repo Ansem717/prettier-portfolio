@@ -1,7 +1,7 @@
 .cube-container {
   position: absolute;
   left: 200px;
-  top: 150px;
+  top: 200px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -13,30 +13,30 @@
 
 .front {
   background-color: #F00;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .top {
   background-color: #0F0;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .right {
   background-color: #00F;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .bottom {
   background-color: #FF0;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .left {
   background-color: #F0F;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .back {
   background-color: #0FF;
-  opacity: 0.5;
+  opacity: 0.75;
 }
